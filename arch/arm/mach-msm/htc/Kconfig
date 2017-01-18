@@ -57,4 +57,8 @@ config HTC_HEADSET_GPIO
 	help
 	  Provides support for HTC GPIO headset detection.
 
+config HTC_FINGERPRINT
+	tristate "HTC Fingerprint Service driver"
+	default n
+
 endmenu
