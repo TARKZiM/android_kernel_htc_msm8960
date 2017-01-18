@@ -36,8 +36,8 @@ static DEFINE_MUTEX(scm_lock);
 		__cmd_size + __resp_size)
 		
 		#undef PINFO
-#define PINFO(fmt, ...) printk(KERN_INFO TAG "[I] %s(%i, %s): " fmt "\n", \
-		__func__, current->pid, current->comm, ##__VA_ARGS__)
+// #define PINFO(fmt, ...) printk(KERN_INFO TAG "[I] %s(%i, %s): " fmt "\n", \
+//		__func__, current->pid, current->comm, ##__VA_ARGS__)
 /**
  * struct scm_command - one SCM command buffer
  * @len: total available memory for command and response
@@ -556,6 +556,6 @@ int secure_access_item(unsigned int is_write, unsigned int id, unsigned int buf_
 	ret = scm_call(SCM_SVC_OEM, TZ_HTC_SVC_ACCESS_ITEM,
 			&req, sizeof(req), NULL, 0);
 
-	PINFO("TZ_HTC_SVC_ACCESS_ITEM id %d ret = %d", id, ret);
+	//PINFO("TZ_HTC_SVC_ACCESS_ITEM id %d ret = %d", id, ret);
 	return ret;
 }
