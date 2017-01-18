@@ -34,6 +34,10 @@ static DEFINE_MUTEX(scm_lock);
 #define SCM_BUF_LEN(__cmd_size, __resp_size)	\
 	(sizeof(struct scm_command) + sizeof(struct scm_response) + \
 		__cmd_size + __resp_size)
+		
+		#undef PINFO
+#define PINFO(fmt, ...) printk(KERN_INFO TAG "[I] %s(%i, %s): " fmt "\n", \
+		__func__, current->pid, current->comm, ##__VA_ARGS__)
 /**
  * struct scm_command - one SCM command buffer
  * @len: total available memory for command and response
@@ -76,6 +80,13 @@ struct scm_response {
 	u32	len;
 	u32	buf_offset;
 	u32	is_complete;
+};
+
+struct oem_access_item_req {
+	u32	is_write;
+	u32	id;
+	u32	buf_len;
+	void *buf;
 };
 
 /**
