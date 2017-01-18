@@ -24,6 +24,9 @@
 #define SCM_SVC_CP			0xC
 #define SCM_SVC_DCVS			0xD
 #define SCM_SVC_TZSCHEDULER		0xFC
+#define ITEM_SEC_ATS		        0x39
+#define ITEM_FP_KEY_ENCRYPT		0x27
+#define ITEM_FP_KEY_DECRYPT		0x29
 
 #define DEFINE_SCM_BUFFER(__n) \
 static char __n[PAGE_SIZE] __aligned(PAGE_SIZE);
