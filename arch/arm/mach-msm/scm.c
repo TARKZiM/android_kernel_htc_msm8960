@@ -184,6 +184,7 @@ static void scm_inv_range(unsigned long start, unsigned long end)
 	dsb();
 	isb();
 }
+EXPORT_SYMBOL(scm_inv_range);
 
 /**
  * scm_call_common() - Send an SCM command
@@ -530,3 +531,20 @@ static int scm_init(void)
 	return 0;
 }
 early_initcall(scm_init);
+
+int secure_access_item(unsigned int is_write, unsigned int id, unsigned int buf_len, unsigned char *buf)
+{
+	int ret;
+	struct oem_access_item_req req;
+
+	req.is_write = is_write;
+	req.id = id;
+	req.buf_len = buf_len;
+	req.buf = (void *)virt_to_phys(buf);
+
+	ret = scm_call(SCM_SVC_OEM, TZ_HTC_SVC_ACCESS_ITEM,
+			&req, sizeof(req), NULL, 0);
+
+	PINFO("TZ_HTC_SVC_ACCESS_ITEM id %d ret = %d", id, ret);
+	return ret;
+}
