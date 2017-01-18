@@ -36,8 +36,9 @@ static DEFINE_MUTEX(scm_lock);
 		__cmd_size + __resp_size)
 		
 		#undef PINFO
-// #define PINFO(fmt, ...) printk(KERN_INFO TAG "[I] %s(%i, %s): " fmt "\n", \
-//		__func__, current->pid, current->comm, ##__VA_ARGS__)
+/** #define PINFO(fmt, ...) printk(KERN_INFO TAG "[I] %s(%i, %s): " fmt "\n", \
+		__func__, current->pid, current->comm, ##__VA_ARGS__)
+*/
 /**
  * struct scm_command - one SCM command buffer
  * @len: total available memory for command and response
