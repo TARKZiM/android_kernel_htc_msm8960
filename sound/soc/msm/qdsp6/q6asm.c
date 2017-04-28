@@ -4064,12 +4064,12 @@ int q6asm_cmd(struct audio_client *ac, int cmd)
 	case CMD_FLUSH:
 		pr_debug("%s:CMD_FLUSH\n", __func__);
 		hdr.opcode = ASM_STREAM_CMD_FLUSH;
+		atomic_set(&ac->cmd_close_state, 1);
 		state = &ac->cmd_state;
 		break;
 	case CMD_OUT_FLUSH:
 		pr_debug("%s:CMD_OUT_FLUSH\n", __func__);
 		hdr.opcode = ASM_STREAM_CMD_FLUSH_READBUFS;
-		atomic_set(&ac->cmd_close_state, 1);
 		state = &ac->cmd_state;
 		break;
 	case CMD_EOS:
